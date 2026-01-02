@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Quote } from "lucide-react";
 
+const LINKEDIN_URL = "https://www.linkedin.com/company/redantstaffing/";
+
 const TestimonialsSection = () => {
   const testimonials = [
     {
@@ -27,57 +29,58 @@ const TestimonialsSection = () => {
   ];
 
   const stats = [
-    { value: "500+", label: "Professionals Placed" },
-    { value: "100+", label: "Partner Companies" },
-    { value: "95%", label: "Satisfaction Rate" },
-    { value: "7 Days", label: "Average Placement Time" },
+    { value: "500+", label: "Professionals Placed", action: () => document.querySelector("#jobs")?.scrollIntoView({ behavior: "smooth" }) },
+    { value: "100+", label: "Partner Companies", action: () => document.querySelector("#partners")?.scrollIntoView({ behavior: "smooth" }) },
+    { value: "95%", label: "Satisfaction Rate", action: () => window.open(LINKEDIN_URL, "_blank") },
+    { value: "7 Days", label: "Average Placement Time", action: () => document.querySelector("#jobs")?.scrollIntoView({ behavior: "smooth" }) },
   ];
 
   return (
-    <section className="py-20 lg:py-28 bg-muted/30 relative">
+    <section className="py-16 sm:py-20 lg:py-28 bg-muted/30 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4">
             Testimonials
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground mb-4 sm:mb-6">
             Trusted by <span className="text-gradient">Growing Professionals</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base sm:text-lg text-muted-foreground px-4">
             Hear from candidates and partners who've experienced the RedAnt difference.
           </p>
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
           {testimonials.map((testimonial, index) => (
             <Card
               key={testimonial.author}
               variant="elevated"
-              className="group opacity-0 animate-fade-in-up"
+              className="group opacity-0 animate-fade-in-up hover:scale-[1.02] transition-transform cursor-pointer"
               style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => window.open(LINKEDIN_URL, "_blank")}
             >
-              <CardContent className="p-6">
+              <CardContent className="p-5 sm:p-6">
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star
                       key={i}
-                      size={16}
+                      size={14}
                       className="fill-primary text-primary"
                     />
                   ))}
                 </div>
                 
-                <div className="relative mb-6">
-                  <Quote className="absolute -top-2 -left-2 w-8 h-8 text-primary/10" />
-                  <p className="text-foreground leading-relaxed pl-4">
+                <div className="relative mb-5 sm:mb-6">
+                  <Quote className="absolute -top-2 -left-2 w-6 sm:w-8 h-6 sm:h-8 text-primary/10" />
+                  <p className="text-foreground text-sm sm:text-base leading-relaxed pl-4">
                     "{testimonial.quote}"
                   </p>
                 </div>
 
                 <div className="flex items-center gap-3 pt-4 border-t border-border">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-primary-foreground font-semibold">
+                  <div className="w-9 sm:w-10 h-9 sm:h-10 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-primary-foreground font-semibold text-sm">
                     {testimonial.author.charAt(0)}
                   </div>
                   <div>
@@ -95,18 +98,19 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Trust Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {stats.map((stat, index) => (
-            <div
+            <button
               key={stat.label}
-              className="text-center p-6 rounded-xl bg-card shadow-soft opacity-0 animate-scale-in"
+              onClick={stat.action}
+              className="text-center p-4 sm:p-6 rounded-xl bg-card shadow-soft opacity-0 animate-scale-in hover:scale-105 hover:shadow-elevated transition-all"
               style={{ animationDelay: `${0.3 + index * 0.1}s` }}
             >
-              <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1 sm:mb-2">
                 {stat.value}
               </div>
-              <div className="text-muted-foreground text-sm">{stat.label}</div>
-            </div>
+              <div className="text-muted-foreground text-xs sm:text-sm">{stat.label}</div>
+            </button>
           ))}
         </div>
       </div>
