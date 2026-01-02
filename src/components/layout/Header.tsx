@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import Logo from "@/components/ui/Logo";
 import { Menu, X } from "lucide-react";
+
+const LINKEDIN_URL = "https://www.linkedin.com/company/redantstaffing/";
+const EMAIL = "redantstaffing@gmail.com";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,18 +17,41 @@ const Header = () => {
     { label: "Partners", href: "#partners" },
   ];
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+    setIsMenuOpen(false);
+  };
+
+  const handleContactClick = () => {
+    window.location.href = `mailto:${EMAIL}`;
+  };
+
+  const handleApplyClick = () => {
+    window.open(LINKEDIN_URL, "_blank", "noopener,noreferrer");
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="#hero" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-              <span className="text-primary-foreground font-bold text-lg">R</span>
-            </div>
-            <span className="font-bold text-xl text-foreground">
-              Red<span className="text-primary">Ant</span>
-            </span>
+          <a 
+            href="#hero" 
+            onClick={(e) => scrollToSection(e, "#hero")}
+            className="group hover:opacity-90 transition-opacity"
+          >
+            <Logo size="md" />
           </a>
 
           {/* Desktop Navigation */}
@@ -33,6 +60,7 @@ const Header = () => {
               <a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => scrollToSection(e, link.href)}
                 className="text-muted-foreground hover:text-primary font-medium transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
@@ -42,15 +70,25 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant="ghost" size="sm">
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={handleContactClick}
+              className="hover:bg-accent"
+            >
               Contact Us
             </Button>
-            <Button size="sm">Apply Now</Button>
+            <Button 
+              size="sm"
+              onClick={handleApplyClick}
+            >
+              Apply Now
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-foreground"
+            className="lg:hidden p-2 text-foreground hover:bg-accent rounded-lg transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -66,17 +104,26 @@ const Header = () => {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-muted-foreground hover:text-primary font-medium py-2 px-4 rounded-lg hover:bg-accent transition-colors duration-200"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => scrollToSection(e, link.href)}
+                  className="text-muted-foreground hover:text-primary font-medium py-3 px-4 rounded-lg hover:bg-accent transition-colors duration-200"
                 >
                   {link.label}
                 </a>
               ))}
               <div className="flex flex-col gap-2 mt-4 px-4">
-                <Button variant="outline" className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={handleContactClick}
+                >
                   Contact Us
                 </Button>
-                <Button className="w-full">Apply Now</Button>
+                <Button 
+                  className="w-full"
+                  onClick={handleApplyClick}
+                >
+                  Apply Now
+                </Button>
               </div>
             </nav>
           </div>
