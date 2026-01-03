@@ -28,6 +28,14 @@ export default {
         },
         "red-glow": "hsl(var(--red-glow))",
         "red-soft": "hsl(var(--red-soft))",
+        redant: {
+          r: "hsl(var(--redant-r))",
+          e: "hsl(var(--redant-e))",
+          d: "hsl(var(--redant-d))",
+          a: "hsl(var(--redant-a))",
+          n: "hsl(var(--redant-n))",
+          t: "hsl(var(--redant-t))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

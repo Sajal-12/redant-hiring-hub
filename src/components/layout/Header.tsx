@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/ui/Logo";
 import { Menu, X } from "lucide-react";
@@ -8,63 +9,64 @@ const EMAIL = "redantstaffing@gmail.com";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const navLinks = [
-    { label: "Home", href: "#hero" },
-    { label: "About", href: "#about" },
-    { label: "Jobs", href: "#jobs" },
-    { label: "Why Us", href: "#why-us" },
-    { label: "Partners", href: "#partners" },
+    { letter: "R", label: "Roles", href: "/roles", colorClass: "text-redant-r" },
+    { letter: "E", label: "Experties", href: "/experties", colorClass: "text-redant-e" },
+    { letter: "D", label: "Demands", href: "/demands", colorClass: "text-redant-d" },
+    { letter: "A", label: "About", href: "/about", colorClass: "text-redant-a" },
+    { letter: "N", label: "Network", href: "/network", colorClass: "text-redant-n" },
+    { letter: "T", label: "Talent", href: "/talent", colorClass: "text-redant-t" },
   ];
-
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-    }
-    setIsMenuOpen(false);
-  };
 
   const handleContactClick = () => {
     window.location.href = `mailto:${EMAIL}`;
   };
 
   const handleApplyClick = () => {
-    window.open(LINKEDIN_URL, "_blank", "noopener,noreferrer");
+    navigate("/apply");
+    setIsMenuOpen(false);
   };
+
+  const isActive = (href: string) => location.pathname === href;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a 
-            href="#hero" 
-            onClick={(e) => scrollToSection(e, "#hero")}
+          <Link 
+            to="/" 
             className="group hover:opacity-90 transition-opacity"
           >
             <Logo size="md" />
-          </a>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          {/* Desktop Navigation - REDANT */}
+          <nav className="hidden xl:flex items-center gap-6">
             {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => scrollToSection(e, link.href)}
-                className="text-muted-foreground hover:text-primary font-medium transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
+              <Link
+                key={link.letter}
+                to={link.href}
+                className={`group flex items-center gap-1.5 font-medium transition-all duration-300 hover:scale-105 ${
+                  isActive(link.href) ? "scale-105" : ""
+                }`}
               >
-                {link.label}
-              </a>
+                <span
+                  className={`text-xl font-bold ${link.colorClass} transition-all duration-300 group-hover:scale-125 group-hover:drop-shadow-lg`}
+                >
+                  {link.letter}
+                </span>
+                <span
+                  className={`text-sm text-muted-foreground group-hover:text-foreground transition-colors ${
+                    isActive(link.href) ? "text-foreground font-semibold" : ""
+                  }`}
+                >
+                  — {link.label}
+                </span>
+              </Link>
             ))}
           </nav>
 
@@ -81,6 +83,7 @@ const Header = () => {
             <Button 
               size="sm"
               onClick={handleApplyClick}
+              className="bg-gradient-to-r from-redant-r via-redant-e to-redant-t hover:opacity-90 transition-opacity"
             >
               Apply Now
             </Button>
@@ -99,16 +102,25 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="lg:hidden py-4 border-t border-border/50 animate-fade-in">
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-1">
               {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={(e) => scrollToSection(e, link.href)}
-                  className="text-muted-foreground hover:text-primary font-medium py-3 px-4 rounded-lg hover:bg-accent transition-colors duration-200"
+                <Link
+                  key={link.letter}
+                  to={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-accent transition-colors duration-200 ${
+                    isActive(link.href) ? "bg-accent" : ""
+                  }`}
                 >
-                  {link.label}
-                </a>
+                  <span
+                    className={`text-2xl font-bold ${link.colorClass}`}
+                  >
+                    {link.letter}
+                  </span>
+                  <span className="text-foreground font-medium">
+                    — {link.label}
+                  </span>
+                </Link>
               ))}
               <div className="flex flex-col gap-2 mt-4 px-4">
                 <Button 
@@ -119,7 +131,7 @@ const Header = () => {
                   Contact Us
                 </Button>
                 <Button 
-                  className="w-full"
+                  className="w-full bg-gradient-to-r from-redant-r via-redant-e to-redant-t"
                   onClick={handleApplyClick}
                 >
                   Apply Now
