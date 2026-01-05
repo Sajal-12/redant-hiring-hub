@@ -1,147 +1,139 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Linkedin, Twitter, Instagram, Facebook, Phone } from "lucide-react";
 import Logo from "@/components/ui/Logo";
+import { MessageCircle } from "lucide-react";
 
+const WHATSAPP_NUMBER = "918123314555";
 const LINKEDIN_URL = "https://www.linkedin.com/company/redantstaffing/";
-const EMAIL = "redantstaffing@gmail.com";
-const WHATSAPP = "+91 81233 14555";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
-  const footerLinks = {
-    navigation: [
-      { label: "Roles", href: "/roles", letter: "R", color: "text-redant-r" },
-      { label: "Experties", href: "/experties", letter: "E", color: "text-redant-e" },
-      { label: "Demands", href: "/demands", letter: "D", color: "text-redant-d" },
-      { label: "About", href: "/about", letter: "A", color: "text-redant-a" },
-      { label: "Network", href: "/network", letter: "N", color: "text-redant-n" },
-      { label: "Talent", href: "/talent", letter: "T", color: "text-redant-t" },
-    ],
-    resources: [
-      { label: "Apply Now", href: "/apply" },
-      { label: "LinkedIn", href: LINKEDIN_URL, external: true },
-      { label: "Contact Us", href: `mailto:${EMAIL}`, external: true },
-    ],
+  const handleWhatsAppClick = () => {
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=Hi, I'm interested in RedAnt Staffing services.`, "_blank");
   };
 
-  const socialLinks = [
-    { icon: Linkedin, href: LINKEDIN_URL, label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com/redantstaffing", label: "Twitter" },
-    { icon: Instagram, href: "https://instagram.com/redantstaffing", label: "Instagram" },
-    { icon: Facebook, href: "https://facebook.com/redantstaffing", label: "Facebook" },
-  ];
-
   return (
-    <footer className="bg-charcoal text-secondary py-16 lg:py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-          {/* Brand Column */}
-          <div className="lg:col-span-1">
-            <div className="mb-6">
-              <Logo size="md" />
-            </div>
-            <p className="text-secondary/70 mb-6 leading-relaxed">
-              Building stronger teams through trusted staffing solutions across India.
-            </p>
-            <div className="space-y-3">
-              <a
-                href={`mailto:${EMAIL}`}
-                className="flex items-center gap-3 text-secondary/70 hover:text-primary transition-colors duration-200 group"
-              >
-                <Mail size={18} className="group-hover:scale-110 transition-transform" />
-                <span className="text-sm">{EMAIL}</span>
-              </a>
-              <a
-                href={`https://wa.me/${WHATSAPP.replace(/[^0-9]/g, '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-secondary/70 hover:text-primary transition-colors duration-200 group"
-              >
-                <Phone size={18} className="group-hover:scale-110 transition-transform" />
-                <span className="text-sm">{WHATSAPP}</span>
-              </a>
-              <div className="flex items-center gap-3 text-secondary/70">
-                <MapPin size={18} />
-                <span className="text-sm">India</span>
-              </div>
-            </div>
-          </div>
+    <>
+      {/* Floating WhatsApp Button */}
+      <button
+        onClick={handleWhatsAppClick}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110"
+        aria-label="Chat on WhatsApp"
+      >
+        <MessageCircle size={24} className="text-white" />
+      </button>
 
-          {/* REDANT Navigation */}
-          <div>
-            <h4 className="font-semibold text-secondary mb-4">Navigation</h4>
-            <ul className="space-y-3">
-              {footerLinks.navigation.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="flex items-center gap-2 text-secondary/70 hover:text-primary transition-colors duration-200"
-                  >
-                    <span className={`font-bold ${link.color}`}>{link.letter}</span>
-                    <span>— {link.label}</span>
+      <footer className="bg-card border-t border-border/50 py-12">
+        <div className="container-wide">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+            {/* Brand */}
+            <div className="sm:col-span-2 lg:col-span-1">
+              <Link to="/" className="flex items-center gap-3 mb-4">
+                <Logo className="w-8 h-8" />
+                <span className="text-lg font-bold text-foreground">
+                  red<span className="text-primary">ant</span>
+                </span>
+              </Link>
+              <p className="text-muted-foreground text-sm">
+                India's leading recruitment agency connecting exceptional talent with growing businesses.
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="font-semibold text-foreground mb-4">Quick Links</h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                    About Us
                   </Link>
                 </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold text-secondary mb-4">Quick Links</h4>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.label}>
-                  {link.external ? (
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-secondary/70 hover:text-primary transition-colors duration-200"
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <Link
-                      to={link.href}
-                      className="text-secondary/70 hover:text-primary transition-colors duration-200"
-                    >
-                      {link.label}
-                    </Link>
-                  )}
+                <li>
+                  <Link to="/roles" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                    Find Jobs
+                  </Link>
                 </li>
-              ))}
-            </ul>
-          </div>
+                <li>
+                  <Link to="/talent" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                    Hire Talent
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/apply" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          {/* Social */}
-          <div>
-            <h4 className="font-semibold text-secondary mb-4">Connect With Us</h4>
-            <div className="flex flex-wrap gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary/70 hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
-                >
-                  <social.icon size={18} />
-                </a>
-              ))}
+            {/* Services */}
+            <div>
+              <h4 className="font-semibold text-foreground mb-4">Services</h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/experties" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                    Consulting
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/roles" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                    Recruitment
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/network" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                    Outsourcing
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/demands" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                    Training
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Connect */}
+            <div>
+              <h4 className="font-semibold text-foreground mb-4">Connect</h4>
+              <ul className="space-y-2">
+                <li>
+                  <a 
+                    href={LINKEDIN_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  >
+                    WhatsApp
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="mailto:redantstaffing@gmail.com"
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  >
+                    Email
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
 
-        {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-secondary/10">
-          <p className="text-secondary/60 text-sm text-center">
-            © {currentYear} RedAnt Staffing. All rights reserved.
-          </p>
+          {/* Bottom Bar */}
+          <div className="mt-12 pt-8 border-t border-border/50 text-center text-muted-foreground text-sm">
+            <p>© {new Date().getFullYear()} RedAnt Staffing. All rights reserved.</p>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 };
 
