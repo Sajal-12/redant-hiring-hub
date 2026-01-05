@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 220 20% 97%;
     --foreground: 220 15% 15%;
 
     --card: 0 0% 100%;
@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 15% 15%;
 
-    --primary: 14 90% 55%;
+    --primary: 0 75% 50%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 15% 95%;
@@ -24,40 +24,22 @@
     --muted: 220 15% 96%;
     --muted-foreground: 220 10% 45%;
 
-    --accent: 14 70% 95%;
-    --accent-foreground: 14 90% 40%;
+    --accent: 0 70% 95%;
+    --accent-foreground: 0 75% 40%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 220 15% 90%;
     --input: 220 15% 90%;
-    --ring: 14 90% 55%;
+    --ring: 0 75% 50%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    --charcoal: 220 15% 20%;
-    --charcoal-light: 220 10% 35%;
-    --red-glow: 14 90% 55%;
-    --red-soft: 14 70% 97%;
-
-    /* REDANT brand colors */
-    --redant-r: 14 90% 55%;
-    --redant-e: 32 95% 50%;
-    --redant-d: 0 85% 50%;
-    --redant-a: 350 80% 55%;
-    --redant-n: 20 85% 45%;
-    --redant-t: 45 90% 50%;
-
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(14 70% 98%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 15% 98%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(14 90% 55%) 0%, hsl(32 95% 50%) 100%);
-    --gradient-redant: linear-gradient(90deg, hsl(14 90% 55%), hsl(32 95% 50%), hsl(0 85% 50%), hsl(350 80% 55%), hsl(20 85% 45%), hsl(45 90% 50%));
-    
-    --shadow-soft: 0 4px 20px -4px hsl(220 15% 20% / 0.08);
-    --shadow-card: 0 8px 30px -8px hsl(220 15% 20% / 0.1);
-    --shadow-elevated: 0 20px 50px -15px hsl(220 15% 20% / 0.15);
-    --shadow-glow: 0 0 40px hsl(14 90% 55% / 0.15);
+    /* RedAnt brand colors */
+    --redant-primary: 0 75% 50%;
+    --redant-dark: 220 20% 10%;
+    --redant-light: 0 70% 95%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -70,56 +52,38 @@
   }
 
   .dark {
-    --background: 220 15% 8%;
+    --background: 220 20% 7%;
     --foreground: 0 0% 98%;
 
-    --card: 220 15% 12%;
+    --card: 220 20% 10%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 220 15% 10%;
+    --popover: 220 20% 8%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 14 90% 58%;
+    --primary: 0 75% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 15% 16%;
+    --secondary: 220 20% 14%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 15% 18%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 220 20% 16%;
+    --muted-foreground: 220 10% 55%;
 
-    --accent: 14 50% 15%;
-    --accent-foreground: 14 90% 70%;
+    --accent: 0 50% 15%;
+    --accent-foreground: 0 75% 70%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 20%;
-    --ring: 14 90% 58%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 0 75% 55%;
 
-    --charcoal: 220 15% 85%;
-    --charcoal-light: 220 10% 70%;
-    --red-glow: 14 90% 58%;
-    --red-soft: 14 50% 12%;
-
-    /* REDANT brand colors - dark mode */
-    --redant-r: 14 90% 60%;
-    --redant-e: 32 95% 55%;
-    --redant-d: 0 85% 55%;
-    --redant-a: 350 80% 60%;
-    --redant-n: 20 85% 50%;
-    --redant-t: 45 90% 55%;
-
-    --gradient-hero: linear-gradient(135deg, hsl(220 15% 8%) 0%, hsl(220 15% 12%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(220 15% 12%) 0%, hsl(220 15% 10%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(14 90% 58%) 0%, hsl(32 95% 55%) 100%);
-    --gradient-redant: linear-gradient(90deg, hsl(14 90% 60%), hsl(32 95% 55%), hsl(0 85% 55%), hsl(350 80% 60%), hsl(20 85% 50%), hsl(45 90% 55%));
-    
-    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
-    --shadow-card: 0 8px 30px -8px hsl(0 0% 0% / 0.4);
-    --shadow-elevated: 0 20px 50px -15px hsl(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 60px hsl(14 90% 58% / 0.2);
+    /* RedAnt brand colors - dark mode */
+    --redant-primary: 0 75% 55%;
+    --redant-dark: 220 20% 5%;
+    --redant-light: 0 50% 15%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -137,12 +101,16 @@
     @apply border-border;
   }
 
+  html {
+    @apply dark;
+  }
+
   body {
-    @apply bg-background text-foreground font-outfit antialiased;
+    @apply bg-background text-foreground font-inter antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-outfit font-semibold tracking-tight;
+    @apply font-inter font-bold tracking-tight;
   }
 }
 
@@ -151,38 +119,8 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80;
   }
 
-  .bg-hero-gradient {
-    background: var(--gradient-hero);
-  }
-
-  .bg-card-gradient {
-    background: var(--gradient-card);
-  }
-
-  .shadow-soft {
-    box-shadow: var(--shadow-soft);
-  }
-
-  .shadow-card {
-    box-shadow: var(--shadow-card);
-  }
-
-  .shadow-elevated {
-    box-shadow: var(--shadow-elevated);
-  }
-
-  .shadow-glow {
-    box-shadow: var(--shadow-glow);
-  }
-
-  .ant-path {
-    background: repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 8px,
-      hsl(var(--primary) / 0.15) 8px,
-      hsl(var(--primary) / 0.15) 16px
-    );
+  .glass-effect {
+    @apply bg-background/80 backdrop-blur-lg border border-border/50;
   }
 }
 
@@ -193,47 +131,36 @@
 
   .hover-lift:hover {
     @apply -translate-y-1;
-    box-shadow: var(--shadow-elevated);
   }
 
-  .btn-glow {
-    @apply relative overflow-hidden;
+  .section-padding {
+    @apply py-20 lg:py-32;
   }
 
-  .btn-glow::after {
-    content: '';
-    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
-    background: radial-gradient(circle at center, hsl(var(--primary) / 0.3) 0%, transparent 70%);
-  }
-
-  .btn-glow:hover::after {
-    @apply opacity-100;
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.2); }
-  50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.4); }
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-@keyframes march {
-  0% { background-position: 0 0; }
-  100% { background-position: 24px 0; }
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.animate-march {
-  animation: march 1s linear infinite;
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
 }

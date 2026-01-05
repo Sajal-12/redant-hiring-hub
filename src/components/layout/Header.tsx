@@ -1,142 +1,114 @@
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import Logo from "@/components/ui/Logo";
 import { Menu, X } from "lucide-react";
+import Logo from "@/components/ui/Logo";
 
-const LINKEDIN_URL = "https://www.linkedin.com/company/redantstaffing/";
-const EMAIL = "redantstaffing@gmail.com";
+const navItems = [
+  { label: "HOME", href: "/" },
+  { label: "ABOUT", href: "/about" },
+  { label: "OUR TEAM", href: "/network" },
+  { label: "JOBS", href: "/roles" },
+  { label: "SERVICES", href: "/experties" },
+  { label: "EMPLOYERS", href: "/talent" },
+];
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
-  const navLinks = [
-    { letter: "R", label: "Roles", href: "/roles", colorClass: "text-redant-r" },
-    { letter: "E", label: "Experties", href: "/experties", colorClass: "text-redant-e" },
-    { letter: "D", label: "Demands", href: "/demands", colorClass: "text-redant-d" },
-    { letter: "A", label: "About", href: "/about", colorClass: "text-redant-a" },
-    { letter: "N", label: "Network", href: "/network", colorClass: "text-redant-n" },
-    { letter: "T", label: "Talent", href: "/talent", colorClass: "text-redant-t" },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const handleContactClick = () => {
-    window.location.href = `mailto:${EMAIL}`;
-  };
-
-  const handleApplyClick = () => {
-    navigate("/apply");
-    setIsMenuOpen(false);
-  };
-
-  const isActive = (href: string) => location.pathname === href;
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled || isMobileMenuOpen
+          ? "bg-background/95 backdrop-blur-md border-b border-border/50"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container-wide">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link 
-            to="/" 
-            className="group hover:opacity-90 transition-opacity"
-          >
-            <Logo size="md" />
+          <Link to="/" className="flex items-center gap-3">
+            <Logo className="w-10 h-10" />
+            <span className="text-xl font-bold text-foreground tracking-tight">
+              red<span className="text-primary">ant</span>
+            </span>
           </Link>
 
-          {/* Desktop Navigation - REDANT */}
-          <nav className="hidden xl:flex items-center gap-6">
-            {navLinks.map((link) => (
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {navItems.map((item) => (
               <Link
-                key={link.letter}
-                to={link.href}
-                className={`group flex items-center gap-1.5 font-medium transition-all duration-300 hover:scale-105 ${
-                  isActive(link.href) ? "scale-105" : ""
+                key={item.label}
+                to={item.href}
+                className={`text-sm font-medium tracking-wider transition-colors hover:text-primary ${
+                  location.pathname === item.href
+                    ? "text-primary"
+                    : "text-muted-foreground"
                 }`}
               >
-                <span
-                  className={`text-xl font-bold ${link.colorClass} transition-all duration-300 group-hover:scale-125 group-hover:drop-shadow-lg`}
-                >
-                  {link.letter}
-                </span>
-                <span
-                  className={`text-sm text-muted-foreground group-hover:text-foreground transition-colors ${
-                    isActive(link.href) ? "text-foreground font-semibold" : ""
-                  }`}
-                >
-                  — {link.label}
-                </span>
+                {item.label}
               </Link>
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-3">
-            <Button 
-              variant="ghost" 
-              size="sm"
-              onClick={handleContactClick}
-              className="hover:bg-accent"
-            >
-              Contact Us
-            </Button>
-            <Button 
-              size="sm"
-              onClick={handleApplyClick}
-              className="bg-gradient-to-r from-redant-r via-redant-e to-redant-t hover:opacity-90 transition-opacity"
-            >
-              Apply Now
-            </Button>
+          {/* CTA Button */}
+          <div className="hidden lg:flex items-center gap-4">
+            <Link to="/apply">
+              <Button
+                variant="outline"
+                className="border-foreground/20 text-foreground hover:bg-foreground hover:text-background transition-all"
+              >
+                CONTACT
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-foreground hover:bg-accent rounded-lg transition-colors"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 text-foreground"
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border/50 animate-fade-in">
-            <nav className="flex flex-col gap-1">
-              {navLinks.map((link) => (
+        {isMobileMenuOpen && (
+          <div className="lg:hidden py-6 border-t border-border/50">
+            <nav className="flex flex-col gap-4">
+              {navItems.map((item) => (
                 <Link
-                  key={link.letter}
-                  to={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`flex items-center gap-3 py-3 px-4 rounded-lg hover:bg-accent transition-colors duration-200 ${
-                    isActive(link.href) ? "bg-accent" : ""
+                  key={item.label}
+                  to={item.href}
+                  className={`text-sm font-medium tracking-wider py-2 transition-colors hover:text-primary ${
+                    location.pathname === item.href
+                      ? "text-primary"
+                      : "text-muted-foreground"
                   }`}
                 >
-                  <span
-                    className={`text-2xl font-bold ${link.colorClass}`}
-                  >
-                    {link.letter}
-                  </span>
-                  <span className="text-foreground font-medium">
-                    — {link.label}
-                  </span>
+                  {item.label}
                 </Link>
               ))}
-              <div className="flex flex-col gap-2 mt-4 px-4">
-                <Button 
-                  variant="outline" 
-                  className="w-full"
-                  onClick={handleContactClick}
-                >
-                  Contact Us
+              <Link to="/apply" className="mt-4">
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                  CONTACT
                 </Button>
-                <Button 
-                  className="w-full bg-gradient-to-r from-redant-r via-redant-e to-redant-t"
-                  onClick={handleApplyClick}
-                >
-                  Apply Now
-                </Button>
-              </div>
+              </Link>
             </nav>
           </div>
         )}

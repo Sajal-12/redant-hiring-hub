@@ -1,12 +1,17 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
-import AboutSection from "@/components/sections/AboutSection";
-import JobsSection from "@/components/sections/JobsSection";
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
-import PartnersSection from "@/components/sections/PartnersSection";
+import ServicesSection from "@/components/sections/ServicesSection";
+import IndustriesSection from "@/components/sections/IndustriesSection";
+import JobsSection from "@/components/sections/JobsSection";
+import HowWeWorkSection from "@/components/sections/HowWeWorkSection";
+import ForEmployersCandidatesSection from "@/components/sections/ForEmployersCandidatesSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import CTASection from "@/components/sections/CTASection";
+import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
+import PartnersSection from "@/components/sections/PartnersSection";
+import AboutSection from "@/components/sections/AboutSection";
+import ContactSection from "@/components/sections/ContactSection";
 
 const Index = () => {
   return (
@@ -14,12 +19,17 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
-        <AboutSection />
-        <JobsSection />
         <WhyChooseSection />
-        <PartnersSection />
+        <ServicesSection />
+        <IndustriesSection />
+        <JobsSection />
+        <HowWeWorkSection />
+        <ForEmployersCandidatesSection />
         <TestimonialsSection />
-        <CTASection />
+        <CaseStudiesSection />
+        <PartnersSection />
+        <AboutSection />
+        <ContactSection />
       </main>
       <Footer />
     </div>
